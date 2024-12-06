@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!----======== CSS ======== -->
+  <link rel="stylesheet" href="style.css">
+
+  <!----===== Boxicons CSS ===== -->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+
+  <!--<title>Dashboard Sidebar Menu</title>-->
+</head>
+
+<body>
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <img src="logo.png" alt="">
+        </span>
+
+        <div class="text logo-text">
+          <span class="name">Room Assignment</span>
+          <span class="profession">System</span>
+        </div>
+      </div>
+
+      <i class='bx bx-chevron-right toggle'></i>
+    </header>
+
+    <div class="menu-bar">
+      <div class="menu">
+
+        <li class="search-box">
+          <i class='bx bx-search icon'></i>
+          <input type="text" placeholder="Search Ganes...">
+        </li>
+
+        <ul class="menu-links">
+          <li class="nav-link">
+            <a href="#">
+              <i class='bx bx-home-alt icon'></i>
+              <span class="text nav-text">Dashboard</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="nav_rooms.html">
+              <i class='bx bx-bar-chart-alt-2 icon'></i>
+              <span class="text nav-text">Add Room/Lab</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="nav_weeksched.html">
+              <i class='bx bx-bell icon'></i>
+              <span class="text nav-text">Week Sched</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="#">
+              <i class='bx bx-pie-chart-alt icon'></i>
+              <span class="text nav-text">Schedules</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="#">
+              <i class='bx bx-heart icon'></i>
+              <span class="text nav-text">Likes</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="#">
+              <i class='bx bx-wallet icon'></i>
+              <span class="text nav-text">Wallets</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="bottom-content">
+        <li class="">
+          <a href="#">
+            <i class='bx bx-log-out icon'></i>
+            <span class="text nav-text">Logout</span>
+          </a>
+        </li>
+
+        <li class="mode">
+          <div class="sun-moon">
+            <i class='bx bx-moon icon moon'></i>
+            <i class='bx bx-sun icon sun'></i>
+          </div>
+          <span class="mode-text text">Dark mode</span>
+
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+
+      </div>
+    </div>
+
+  </nav>
+
+  <section class="home">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Room/Lab Management</h1>
+    
+        <!-- Button to trigger modal -->
+        <div class="d-flex justify-content-end mb-3">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomLabModal">
+            Add Room/Lab
+          </button>
+        </div>
+    
+        <!-- Room/Lab List Table -->
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Room/Lab List</h5>
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Type</th>
+                  <th>Number</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="roomTableBody">
+                <!-- Data will be populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Modal for Adding Room/Lab -->
+      <div class="modal fade" id="addRoomLabModal" tabindex="-1" aria-labelledby="addRoomLabModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addRoomLabModalLabel">Add Room/Lab</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="modalForm">
+                <div class="mb-3">
+                  <label for="roomLabType" class="form-label">Type</label>
+                  <select id="roomLabType" class="form-select" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="Lab">Lab</option>
+                    <option value="Room">Room</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="roomLabNumber" class="form-label">Number</label>
+                  <input type="number" class="form-control" id="roomLabNumber" placeholder="Enter room/lab number" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </section>
+
+  <script>
+    const body = document.querySelector('body'),
+      sidebar = body.querySelector('nav'),
+      toggle = body.querySelector(".toggle"),
+      searchBtn = body.querySelector(".search-box"),
+      modeSwitch = body.querySelector(".toggle-switch"),
+      modeText = body.querySelector(".mode-text");
+    toggle.addEventListener("click", () => {
+      sidebar.classList.toggle("close");
+    })
+    searchBtn.addEventListener("click", () => {
+      sidebar.classList.remove("close");
+    })
+    modeSwitch.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      if (body.classList.contains("dark")) {
+        modeText.innerText = "Light mode";
+      } else {
+        modeText.innerText = "Dark mode";
+      }
+    });
+  </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modalForm = document.getElementById('modalForm');
+      const roomTableBody = document.getElementById('roomTableBody');
+
+      // Fetch existing rooms/labs to populate the table
+      const fetchRooms = async () => {
+        const response = await fetch('fetch_rooms.php');
+        const rooms = await response.json();
+        roomTableBody.innerHTML = rooms.map(room => `
+          <tr>
+            <td>${room.type}</td>
+            <td>${room.number}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" onclick="editRoom(${room.id}, '${room.type}', ${room.number})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteRoom(${room.id})">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      };
+
+      // Handle form submission for adding new room/lab
+      modalForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('type', document.getElementById('roomLabType').value);
+        formData.append('number', document.getElementById('roomLabNumber').value);
+
+        const response = await fetch('add_room.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        alert(result.message);
+        modalForm.reset();
+        const modalElement = document.getElementById('addRoomLabModal');
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+        fetchRooms();
+      });
+
+      // Delete room/lab
+      window.deleteRoom = async (id) => {
+        if (confirm('Are you sure you want to delete this room/lab?')) {
+          const response = await fetch(`delete_room.php?id=${id}`);
+          const result = await response.json();
+          alert(result.message);
+          fetchRooms();
+        }
+      };
+
+      // Edit room/lab
+      window.editRoom = (id, type, number) => {
+        document.getElementById('roomLabType').value = type;
+        document.getElementById('roomLabNumber').value = number;
+        const modalElement = new bootstrap.Modal(document.getElementById('addRoomLabModal'));
+        modalElement.show();
+
+        modalForm.onsubmit = async (e) => {
+          e.preventDefault();
+          const formData = new FormData();
+          formData.append('id', id);
+          formData.append('type', document.getElementById('roomLabType').value);
+          formData.append('number', document.getElementById('roomLabNumber').value);
+
+          const response = await fetch('edit_room.php', {
+            method: 'POST',
+            body: formData
+          });
+
+          const result = await response.json();
+          alert(result.message);
+          modalForm.reset();
+          modalElement.hide();
+          fetchRooms();
+        };
+      };
+
+      fetchRooms(); // Initial fetch to populate the room list
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
