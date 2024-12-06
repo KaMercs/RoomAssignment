@@ -6,4 +6,4 @@ nav_weeksched.html
 
 (rooms_db - sql)
 
-(try kita it table.php)
+(try kita it table.php dire pa functionla idea la)
